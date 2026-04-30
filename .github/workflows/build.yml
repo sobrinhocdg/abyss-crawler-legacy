@@ -1,10 +1,11 @@
-name: Build Abyss Crawler Legacy
+name: Build and Release Abyss Crawler Legacy
 
 on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -41,3 +42,31 @@ jobs:
         name: abyss-crawler-legacy
         path: build/libs/*.jar
         if-no-files-found: error
+    
+    - name: Create GitHub Release
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      uses: softprops/action-gh-release@v1
+      with:
+        files: build/libs/*.jar
+        tag_name: v1.0.0
+        name: Abyss Crawler Legacy v1.0.0
+        body: |
+          ## Abyss Crawler Legacy 1.7.10
+          
+          Versão portada e otimizada para Minecraft 1.7.10, rodando perfeitamente em hardware antigo como Pentium B950 dual core.
+          
+          ### Recursos:
+          - 10 blocos personalizados do abismo
+          - Ferramentas e armaduras de gema do abismo
+          - Geração de estruturas no Nether
+          - Baús e spawners customizados
+          - Totalmente em português
+          
+          ### Instalação:
+          1. Instale Minecraft 1.7.10 com Forge
+          2. Coloque este arquivo na pasta `mods`
+          3. Jogue!
+          
+          Baseado no mod original Abyss Crawler para 1.14.4.
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
