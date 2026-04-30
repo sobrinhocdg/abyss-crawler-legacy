@@ -1,0 +1,13 @@
+{
+  "modid": "abysscrawler",
+  "name": "Abyss Crawler Legacy",
+  "description": "Explore o abismo infinito! Versão Legacy 1.7.10 otimizada para hardware antigo.",
+  "version": "1.0.0",
+  "mcversion": "1.7.10",
+  "url": "https://github.com/sobrinhocdg/abyss-crawler-legacy",
+  "authorList": ["sobrinhocdg"],
+  "credits": "Baseado no mod original Abyss Crawler para 1.14.4",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
