@@ -6,7 +6,12 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.registry.GameRegistry;
 import org.apache.logging.log4j.Logger;
+
+import com.sobrinhocdg.abysscrawler.block.ModBlocks;
+import com.sobrinhocdg.abysscrawler.item.ModItems;
+import com.sobrinhocdg.abysscrawler.worldgen.WorldGeneratorAbyss;
 
 @Mod(modid = AbyssCrawler.MODID, name = "Abyss Crawler Legacy", version = "1.0.0", description = "Explore o abismo infinito! Versão Legacy 1.7.10 otimizada para hardware antigo.")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
@@ -26,6 +31,9 @@ public class AbyssCrawler {
     public void preInit(FMLPreInitializationEvent event) {
         logger = event.getModLog();
         logger.info("Abyss Crawler Legacy - PreInitializing...");
+        
+        // Criar creative tab primeiro
+        AbyssCrawlerCreativeTab.init();
         
         // Registrar blocos
         ModBlocks.init();
@@ -49,9 +57,6 @@ public class AbyssCrawler {
         
         // Registrar world generator
         GameRegistry.registerWorldGenerator(new WorldGeneratorAbyss(), 1);
-        
-        // Criar creative tab
-        AbyssCrawlerCreativeTab.init();
         
         logger.info("Abyss Crawler Legacy - Initialized successfully!");
     }
