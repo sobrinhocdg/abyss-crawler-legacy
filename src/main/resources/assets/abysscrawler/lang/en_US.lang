@@ -1,12 +1,5 @@
-tile.abyss_stone.name=Abyss Stone
-tile.abyss_dirt.name=Abyss Dirt
-tile.abyss_grass.name=Abyss Grass
-tile.abyss_obsidian.name=Abyss Obsidian
-tile.abyss_portal.name=Abyss Portal
-tile.abyss_chest.name=Abyss Chest
-tile.abyss_spawner.name=Abyss Spawner
-tile.abyss_bricks.name=Abyss Bricks
-tile.abyss_pillar.name=Abyss Pillar
-tile.abyss_lantern.name=Abyss Lantern
-tile.abyss_ore_diamond.name=Abyss Diamond Ore
-tile.abyss_ore_emerald.name=Abyss Emerald Ore
+tile.abyssStone.name=Abyss Stone
+tile.abyssOre.name=Abyss Ore
+tile.abyssDungeonBrick.name=Abyss Dungeon Brick
+item.abyssCrystal.name=Abyss Crystal
+item.abyssKey.name=Abyss Key

@@ -1,14 +1,14 @@
 [
 {
-  "modid": "abysscrawler",
-  "name": "Abyss Crawler Legacy",
-  "description": "Explore deep abyssal dungeons with unique loot and structures. Ported to 1.7.10 for legacy support.",
+  "modid": "meumod",
+  "name": "Meu Mod Legacy",
+  "description": "Um mod exemplo para Minecraft 1.7.10 usando RetroFuturaGradle",
   "version": "${version}",
   "mcversion": "${mcversion}",
-  "url": "https://github.com/sobrinhocdg/abyss-crawler-legacy",
+  "url": "",
   "updateUrl": "",
-  "authorList": ["sobrinhocdg"],
-  "credits": "Original mod concept for 1.14.4",
+  "authorList": ["SeuNome"],
+  "credits": "",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
