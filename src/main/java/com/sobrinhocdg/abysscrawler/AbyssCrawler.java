@@ -1,69 +1,61 @@
 package com.sobrinhocdg.abysscrawler;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.sobrinhocdg.abysscrawler.init.ModBlocks;
+import com.sobrinhocdg.abysscrawler.init.ModItems;
+import com.sobrinhocdg.abysscrawler.proxy.CommonProxy;
+import com.sobrinhocdg.abysscrawler.tabs.AbyssCrawlerCreativeTab;
+import com.sobrinhocdg.abysscrawler.world.AbyssWorldGenerator;
+
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
-import org.apache.logging.log4j.Logger;
 
-import com.sobrinhocdg.abysscrawler.block.ModBlocks;
-import com.sobrinhocdg.abysscrawler.item.ModItems;
-import com.sobrinhocdg.abysscrawler.worldgen.WorldGeneratorAbyss;
-
-@Mod(modid = AbyssCrawler.MODID, name = "Abyss Crawler Legacy", version = "1.0.0", description = "Explore o abismo infinito! Versão Legacy 1.7.10 otimizada para hardware antigo.")
-@NetworkMod(clientSideRequired = true, serverSideRequired = false)
+@Mod(modid = AbyssCrawler.MODID, name = AbyssCrawler.NAME, version = AbyssCrawler.VERSION, acceptedMinecraftVersions = "1.7.10")
 public class AbyssCrawler {
+
     public static final String MODID = "abysscrawler";
+    public static final String NAME = "Abyss Crawler Legacy";
     public static final String VERSION = "1.0.0";
-    
-    private static Logger logger;
-    
-    @SidedProxy(clientSide = "com.sobrinhocdg.abysscrawler.ClientProxy", serverSide = "com.sobrinhocdg.abysscrawler.CommonProxy")
+
+    @SidedProxy(clientSide = "com.sobrinhocdg.abysscrawler.proxy.ClientProxy", serverSide = "com.sobrinhocdg.abysscrawler.proxy.CommonProxy")
     public static CommonProxy proxy;
-    
+
+    public static final Logger logger = LogManager.getLogger(MODID);
+    public static AbyssCrawlerCreativeTab creativeTab;
+
     @Mod.Instance(MODID)
     public static AbyssCrawler instance;
-    
+
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        logger = event.getModLog();
-        logger.info("Abyss Crawler Legacy - PreInitializing...");
+        logger.info("Pre-initialization started...");
         
-        // Criar creative tab primeiro
-        AbyssCrawlerCreativeTab.init();
-        
-        // Registrar blocos
-        ModBlocks.init();
+        creativeTab = new AbyssCrawlerCreativeTab("abyssCrawlerTab");
         ModBlocks.register();
-        
-        // Registrar items
-        ModItems.init();
         ModItems.register();
+        proxy.preInit(event);
         
-        logger.info("Abyss Crawler Legacy - Blocks and Items registered!");
+        logger.info("Pre-initialization completed.");
     }
-    
+
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        logger.info("Abyss Crawler Legacy - Initializing...");
-        
-        proxy.init();
-        
-        // Registrar receitas
-        ModRecipes.init();
-        
-        // Registrar world generator
-        GameRegistry.registerWorldGenerator(new WorldGeneratorAbyss(), 1);
-        
-        logger.info("Abyss Crawler Legacy - Initialized successfully!");
+        logger.info("Initialization started...");
+        GameRegistry.registerWorldGenerator(new AbyssWorldGenerator(), 0);
+        proxy.init(event);
+        logger.info("Initialization completed. Ready to crawl the abyss!");
     }
-    
+
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-        logger.info("Abyss Crawler Legacy - PostInitializing...");
-        logger.info("Abyss Crawler Legacy - Ready to crawl the abyss!");
+        logger.info("Post-initialization started...");
+        proxy.postInit(event);
+        logger.info("Post-initialization completed.");
     }
 }
